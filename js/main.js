@@ -4,7 +4,6 @@ require.config({
 	}
 });
 
-
 require(['jquery' , 'bombBox'],function($,bombBox){
 	$('#btn').click(function(){
 				var bbox=new bombBox();
@@ -17,7 +16,8 @@ require(['jquery' , 'bombBox'],function($,bombBox){
 						height:150,
 						y	:100,
 						hasclosebtn:true,
-						skinclassname:"skin_a"
+						skinclassname:"skin_a",
+						btnvalue:"知道了",
 					});
 			}
 		)
