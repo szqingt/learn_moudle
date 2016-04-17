@@ -8,9 +8,15 @@ require.config({
 require(['jquery' , 'bombBox'],function($,bombBox){
 	$('#btn').click(function(){
 				var bbox=new bombBox();
-					bbox.alert("hello world",function(){
-						alert("handler test")
-					},{width:100,height:200,});
+					bbox.alert({
+						content:"hello world",
+						fn:function(){
+							alert("handler test")
+						},
+						width:300,
+						height:200,
+						y:100
+					});
 			}
 		)
 })

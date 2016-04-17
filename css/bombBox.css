@@ -3,10 +3,19 @@
 	box-shadow:0 0 10px #333;
 	position: fixed;
 }
-.bombbox_btn{
+.bombbox_alert_footer{
 	position:absolute;
 	bottom:10px;
 	width: 50px;
 	left: 50%;
 	margin-left: -25px;
 }
+.bombbox_alert_title{
+	background-color: #333;
+	color:#FFF;
+	height: 20%;	
+	text-align: center;
+}
+.bombbox_alert_body{
+	padding: 10px;
+}	
