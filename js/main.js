@@ -14,8 +14,10 @@ require(['jquery' , 'bombBox'],function($,bombBox){
 							alert("handler test")
 						},
 						width:300,
-						height:200,
-						y:100
+						height:150,
+						y	:100,
+						hasclosebtn:true,
+						skinclassname:"skin_a"
 					});
 			}
 		)

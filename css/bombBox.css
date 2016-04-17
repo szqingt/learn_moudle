@@ -19,3 +19,43 @@
 .bombbox_alert_body{
 	padding: 10px;
 }	
+.bombbox_alert_closebtn{
+	position: absolute;
+	right: 3px;
+	top:3px;
+	color:#fff;
+	cursor:pointer;
+}
+.bombbox_alert_closebtn:hover{
+	color:#444444;
+}
+.bombbox_alert_closebtn::before {
+    content: "\2716";
+}
+
+/* skin_a */
+.skin_a.bombbox_alert{
+	border: 2px solid orange;
+	border-radius: 5px;
+	position: fixed;
+}
+.skin_a .bombbox_alert_title{
+	background-color: #812363;
+	color:#FFF;
+	height: 20%;	
+	text-align: center;
+}
+.skin_a .bombbox_alert_body{
+	padding: 10px;
+	color:#777;
+}
+.skin_a .bombbox_alert_footer{
+	position:absolute;
+	bottom:10px;
+	width: 50px;
+	left: 50%;
+	margin-left: -25px;
+	background: none;
+	border:1px solid orange;
+	box-shadow: 0 0 4px;
+}

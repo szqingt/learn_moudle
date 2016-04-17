@@ -6,7 +6,9 @@ define(['jquery'],function($){
 			fn:null,
 			width:200,
 			height:150,
-			y:100
+			y:100,
+			hasclosebtn:false,
+			skinclassname:null
 		}
 	}
 
@@ -27,6 +29,16 @@ define(['jquery'],function($){
 				config.fn && config.fn();
 				bbox.remove();
 			})
+			if(config.hasclosebtn){
+				var closebtn=$("<span class='bombbox_alert_closebtn'></span>");
+				closebtn.appendTo(bbox);
+				closebtn.click(function(){
+					bbox.remove();
+				})
+			if(config.skinclassname){
+				bbox.addClass(config.skinclassname)
+			}
+			}
 		},
 		confirm:function(){},
 		prompt:function(){}
