@@ -10,7 +10,7 @@ require(['jquery' , 'bombBox'],function($,bombBox){
 				var bbox=new bombBox();
 					bbox.alert("hello world",function(){
 						alert("handler test")
-					});
+					},{width:100,height:200,});
 			}
 		)
 })
