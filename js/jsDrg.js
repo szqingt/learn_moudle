@@ -1,7 +1,7 @@
 define(['jquery'],function($){
     function drag(){};
     drag.prototype = {
-        Sdrag:function (ele){
+        Sdrag:function (ele,handler){
             function smove(event){
                 var MouseWithBoxX= event.clientX-ele.offset().left,
                 MouseWithBoxY= event.clientY-ele.offset().top;
@@ -44,7 +44,12 @@ define(['jquery'],function($){
                 'left':MX+ 'px'
             })
             }
-            ele.on('mousedown',smove);
+            if(handler){
+                handler.on('mousedown',smove);
+            }else{
+                ele.on('mousedown',smove)
+            }
+            
             }
     }
     return drag;

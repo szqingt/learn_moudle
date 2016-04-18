@@ -18,7 +18,7 @@ require(['jquery' , 'bombBox'],function($,bombBox){
 						hasclosebtn:true,
 						skinclassname:"skin_a",
 						btnvalue:"知道了",
-					});
+					}).on('alert',function(){alert('for on lisent')}).on('close',function(){alert('for on close')})
 			}
 		)
 })
