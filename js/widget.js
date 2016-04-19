@@ -25,6 +25,7 @@ define(function(){
 			this.destructor();
 			this.bbox.off();
 			this.bbox.remove();
+			this.cfg.fn && this.cfg.fn();
 		},
 		renderUI:function(){},	//接口：添加dom节点
 		bindUI:function(){},	//接口：监听事件

@@ -9,10 +9,16 @@ define(['jquery','jsDrg','widget'],function($,a,widget){
 			y:100,
 			hasclosebtn:false,
 			skinclassname:null,
-			btnvalue:"确定",
+			btnalertvalue:"确定",
+			btncanclevalue:"取消",
+			btnpromptvalue:'输入',
+			promptinputpassword:false,
+			promptinputplaceholder:'',
+			maxpromptlength:6,
 			hasmask:true,
 			dragable:true,
-			draghandle:null
+			draghandle:null,
+			maskclose:false
 		},
 		this.handlers={
 
@@ -57,12 +63,24 @@ define(['jquery','jsDrg','widget'],function($,a,widget){
 		// 	}
 		// 	return this;
 		// },
-		confirm:function(){},
-		prompt:function(){},
 		renderUI:function(){
-			this.bbox = $('<div class="bombbox_alert"><div class="bombbox_alert_title">'+this.cfg.title+'</div><div class="bombbox_alert_body">'+this.cfg.content+'</div><input type="button" class="bombbox_alert_footer" value='+this.cfg.btnvalue+' ></div>');
+			var footer_btn='';
+			switch(this.cfg.wintype){
+				case 'alert':footer_btn='<div class="bombbox_footer"><input type="button" class="bombbox_alert_btn" value='+this.cfg.btnalertvalue+' ></div>' 
+					 break;
+				case 'confirm':footer_btn='<div class="bombbox_footer"><input type="button" class="bombbox_alert_btn" value='+this.cfg.btnalertvalue+' ><input type="button" class="bombbox_cancle_btn" value='+this.cfg.btncanclevalue+' ></div>'
+					 break;
+				case 'prompt':this.cfg.content+=' <input class="prompt_input" type='+(this.cfg.promptinputpassword ? "password":"text")+' maxlength='+this.cfg.maxpromptlength+' placeholder='+this.cfg.promptinputplaceholder+' >';
+					footer_btn='<div class="bombbox_footer"><input type="button" class="bombbox_prompt_btn" value='+this.cfg.btnpromptvalue+' ><input type="button" class="bombbox_cancle_btn" value='+this.cfg.btncanclevalue+' ></div>'
+					break;
+			}
+			this.bbox = $('<div class="bombbox_alert"><div class="bombbox_alert_body">'+this.cfg.content+'</div>'+footer_btn+'</div>');
+			if(this.cfg.wintype != "common"){
+				this.bbox.prepend('<div class="bombbox_alert_title">'+this.cfg.title+'</div>')
+				this.bbox.append(footer_btn)
+			};
 			if(this.cfg.hasmask){
-				this.mask=$("<div class='allmask'>sss</div>");
+				this.mask=$("<div class='allmask'></div>");
 				this.mask.appendTo('body');
 			}
 			if(this.cfg.hasclosebtn){
@@ -70,18 +88,27 @@ define(['jquery','jsDrg','widget'],function($,a,widget){
 				this.closebtn.appendTo(this.bbox);
 			}
 			this.bbox.appendTo('body');
+			this.promptinput=this.bbox.find('.prompt_input');
 		},
 		bindUI:function(){
 			var that = this;
-			this.bbox.delegate('.bombbox_alert_footer','click',function(){
+			this.bbox.delegate('.bombbox_alert_btn','click',function(){
 				that.fire('alert');
 				that.destroy();
 			}).delegate('.bombbox_alert_closebtn', 'click', function() {
 				that.fire('close');
 				that.destroy();
+			}).delegate('.bombbox_cancle_btn', 'click', function() {
+				that.fire('cancle');
+				that.destroy();
+			}).delegate('.bombbox_prompt_btn', 'click', function() {
+				that.fire('prompt',that.promptinput.val())
 			});
-			if(this.cfg.fn){
-				this.on('alert',this.cfg.fn);
+			if(this.cfg.maskclose){
+			$('.allmask').on('click', function() {
+				that.fire('maskclose')
+				that.destroy();
+			});
 			}
 		},
 		syncUI:function(){
@@ -107,7 +134,23 @@ define(['jquery','jsDrg','widget'],function($,a,widget){
 			this.mask && this.mask.remove();
 		},
 		alert:function(cfg){
-			$.extend(this.cfg,cfg);
+			$.extend(this.cfg,cfg,{wintype:"alert"});
+			this.render();
+			return this;
+		},
+		confirm:function(cfg){
+			$.extend(this.cfg,cfg,{wintype:"confirm"});	
+			this.render();
+			return this;
+		},
+		prompt:function(cfg){
+			$.extend(this.cfg,cfg,{wintype:"prompt"});	
+			this.render();
+			this.promptinput.focus();
+			return this;
+		},
+		common:function(cfg){
+			$.extend(this.cfg,cfg,{wintype:"common"});	
 			this.render();
 			return this;
 		}

@@ -4,12 +4,15 @@
 	position: fixed;
 	background-color: #fff;
 }
-.bombbox_alert_footer{
+.bombbox_footer{
 	position:absolute;
 	bottom:10px;
-	width: 100px;
-	left: 50%;
-	margin-left: -50px;
+	text-align: center;
+	width: 100%
+}
+.bombbox_footer input{
+	border:none;
+
 }
 .bombbox_alert_title{
 	background-color: #333;
@@ -24,7 +27,8 @@
 	position: absolute;
 	right: 3px;
 	top:3px;
-	color:#fff;
+	color:#827F7C;
+	font-size: 15px;
 	cursor:pointer;
 }
 .bombbox_alert_closebtn:hover{
@@ -45,7 +49,6 @@
 
 /* skin_a */
 .skin_a.bombbox_alert{
-	border: 2px solid orange;
 	border-radius: 5px;
 	position: fixed;
 	background-color: #fff;
@@ -60,13 +63,8 @@
 	padding: 10px;
 	color:#777;
 }
-.skin_a .bombbox_alert_footer{
-	position:absolute;
-	bottom:10px;
-	width: 100px;
-	left: 50%;
-	margin-left: -50px;
+.skin_a .bombbox_footer input{
 	background: none;
-	border:1px solid orange;
 	box-shadow: 0 0 4px;
+	margin-left: 20px;
 }
